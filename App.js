@@ -4,15 +4,8 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import {
-    Platform,
-    StyleSheet,
-    Text,
-    View,
-    FlatList,
-    TouchableHighlight
-} from 'react-native';
+import React, {Component} from 'react';
+import {FlatList, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 
 
 // const instructions = Platform.select({
@@ -68,11 +61,11 @@ export default class App extends Component{
                     data={this.state.ganhuoData}
                     renderItem={({item})=><GanHuoItem ganhuoItem={item} nav={this.props.navigation}/>}
                     onRefresh={
-                        this.refreshing
+                       this.refreshing.bind(this)
                     }
                     refreshing={false}
                     onEndReached={
-                        this._onload
+                        this._onload.bind(this)
                     }
                     ItemSeparatorComponent={this._separator}
                 />
@@ -87,7 +80,7 @@ export default class App extends Component{
                 ganhuoData:[]
         }
         });
-        this.getGanHuoData();
+         this.getGanHuoData();
     }
     //加载更多
     _onload(){
