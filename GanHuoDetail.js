@@ -3,7 +3,12 @@ import {StyleSheet, View, WebView} from 'react-native';
 
 export  default class GanHuoDetail extends Component{
     static navigationOptions ={
-        title:'干货详情',
+        headerTitle:'干货详情',
+        headerTintColor:'white',
+        headerStyle: {
+            backgroundColor: '#ff5350',
+            height:50
+        },
     };
     constructor(props){
         super(props)
