@@ -53,7 +53,7 @@ export default class ImageList extends Component{
                         this._onload
                     }
                     ItemSeparatorComponent={this._separator}
-                    numColumns='2'
+                    numColumns='1'
                 />
             </View>
         );
