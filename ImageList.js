@@ -5,7 +5,7 @@
  */
 
 import React, {Component} from 'react';
-import {FlatList, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
+import {FlatList, Image, StyleSheet, View} from 'react-native';
 
 
 // const instructions = Platform.select({
@@ -14,7 +14,7 @@ import {FlatList, StyleSheet, Text, TouchableHighlight, View} from 'react-native
 //   android: 'Double tap R on your keyboard to reload,\n' +
 //     'Shake or press menu button for dev menu',
 // });
- class GanHuoItem extends Component{
+class GanHuoItem extends Component{
     constructor(props){
         super(props)
 
@@ -23,21 +23,8 @@ import {FlatList, StyleSheet, Text, TouchableHighlight, View} from 'react-native
         const { navigate } = this.props.nav;
         return(
             <View>
-                <TouchableHighlight   style={styles.item_container} activeOpacity={0.5} underlayColor={'red'} onPress={()=>{
-                        // navigate('Profile', { url: this.props.ganhuoItem.url});
-                        navigate('Detail',{url: this.props.ganhuoItem.url});
-                }}>
-                    <View>
-                        <Text style={styles.text_title}>{this.props.ganhuoItem.desc}</Text>
-                        <View style={styles.author}>
-                            <Text style={styles.text_author}>{this.props.ganhuoItem.who==null?'佚名':this.props.ganhuoItem.who}</Text>
-                        </View>
-                        {/*<View style={styles.line}>*/}
-
-                        {/*</View>*/}
-                    </View>
-                </TouchableHighlight>
-
+                <Image source={{uri: this.props.ganhuoItem.url,cache:'force-cache'}}
+                       style={{width: 400, height: 400}} />
             </View>
 
         )
@@ -45,8 +32,8 @@ import {FlatList, StyleSheet, Text, TouchableHighlight, View} from 'react-native
 
 }
 
-export default class App extends Component{
-     currentPage=1;
+export default class ImageList extends Component{
+    currentPage=1;
     constructor(props){
         super(props)
         this.state={ganhuoData:[]};
@@ -59,13 +46,14 @@ export default class App extends Component{
                     data={this.state.ganhuoData}
                     renderItem={({item})=><GanHuoItem ganhuoItem={item} nav={this.props.navigation}/>}
                     onRefresh={
-                       this.refreshing
+                        this.refreshing
                     }
                     refreshing={false}
                     onEndReached={
                         this._onload
                     }
                     ItemSeparatorComponent={this._separator}
+                    numColumns='2'
                 />
             </View>
         );
@@ -76,9 +64,9 @@ export default class App extends Component{
         this.setState(previousState=>{
             return {
                 ganhuoData:[]
-        }
+            }
         });
-         this.getGanHuoData();
+        this.getGanHuoData();
     }
     //加载更多
     _onload=()=>{

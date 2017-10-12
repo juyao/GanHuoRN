@@ -1,19 +1,18 @@
-import React, { Component } from 'react';
-import {
-    View,
-    WebView,
-    StyleSheet
-} from 'react-native';
+import React, {Component} from 'react';
+import {StyleSheet, View, WebView} from 'react-native';
 
 export  default class GanHuoDetail extends Component{
+    static navigationOptions ={
+        title:'干货详情',
+    };
     constructor(props){
         super(props)
        //this.state={url:'https://juyao.github.io'};
 
     }
-    render(){
+    render() {
         //alert(this.props.navigation.state.params.url);
-        return(
+        return (
             <View style={styles.container}>
                 <WebView
                     // ref={WEBVIEW_REF}
@@ -30,9 +29,7 @@ export  default class GanHuoDetail extends Component{
                 />
             </View>
         )
-
     }
-
 }
 const styles = StyleSheet.create({
     container: {
